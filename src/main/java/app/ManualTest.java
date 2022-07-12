@@ -185,9 +185,24 @@ public class ManualTest {
         assert object.get("word").getAsString().equals("five") : "result should be {\"word\": \"five\"}";
 
         // AlwaysTrueWhenOn
-//        boolResult = client.boolVariation("targetbool8", jane, false);
-//        log.info("When targetbool8 is 'on' with on variation 'false' and off variation is 'true' and target identifier jane then result should be 'true', got: '{}'", boolResult);
-//        assert boolResult : "expected true";
+        boolResult = client.boolVariation("AlwaysTrueWhenOn", bob, true);
+        log.info("When AlwaysTrueWhenOn is 'on' with on variation 'true' and off variation is 'false' and target identifier bob then result should be 'false', got: '{}'", boolResult);
+        assert !boolResult : "expected false";
+
+        // AlwaysTrueWhenOn
+        boolResult = client.boolVariation("AlwaysTrueWhenOn", jane, false);
+        log.info("When AlwaysTrueWhenOn is 'on' with on variation 'true' and off variation is 'false' and target identifier jane then result should be 'true', got: '{}'", boolResult);
+        assert boolResult : "expected true";
+
+        // AlwaysFalseWhenOn
+        boolResult = client.boolVariation("AlwaysFalseWhenOn", bob, false);
+        log.info("When AlwaysFalseWhenOn is 'on' with on variation 'false' and off variation is 'true' and target identifier bob then result should be 'true', got: '{}'", boolResult);
+        assert boolResult : "expected true";
+
+        // AlwaysFalseWhenOn
+        boolResult = client.boolVariation("AlwaysFalseWhenOn", jane, false);
+        log.info("When AlwaysFalseWhenOn is 'on' with on variation 'false' and off variation is 'true' and target identifier jane then result should be 'false', got: '{}'", boolResult);
+        assert !boolResult : "expected false";
 
         // release the resources
         client.close();
